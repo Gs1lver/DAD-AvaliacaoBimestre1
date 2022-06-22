@@ -74,10 +74,11 @@ namespace AvaliacaoBimestre1
             // 
             // txtValor
             // 
-            this.txtValor.Location = new System.Drawing.Point(236, 47);
+            this.txtValor.Location = new System.Drawing.Point(236, 49);
             this.txtValor.Name = "txtValor";
             this.txtValor.Size = new System.Drawing.Size(100, 22);
             this.txtValor.TabIndex = 9;
+            this.txtValor.Leave += new System.EventHandler(this.txtValor_Leave);
             // 
             // btnLancar
             // 
@@ -88,6 +89,7 @@ namespace AvaliacaoBimestre1
             this.btnLancar.TabIndex = 10;
             this.btnLancar.Text = "Lançar";
             this.btnLancar.UseVisualStyleBackColor = true;
+            this.btnLancar.Click += new System.EventHandler(this.btnLancar_Click);
             // 
             // btnSacar
             // 
@@ -121,6 +123,7 @@ namespace AvaliacaoBimestre1
             this.btnSair.TabIndex = 7;
             this.btnSair.Text = "S A I R";
             this.btnSair.UseVisualStyleBackColor = true;
+            this.btnSair.Click += new System.EventHandler(this.btnSair_Click);
             // 
             // dtMovimento
             // 
@@ -130,6 +133,7 @@ namespace AvaliacaoBimestre1
             this.dtMovimento.Name = "dtMovimento";
             this.dtMovimento.Size = new System.Drawing.Size(101, 22);
             this.dtMovimento.TabIndex = 8;
+            this.dtMovimento.Leave += new System.EventHandler(this.dtMovimento_Leave);
             // 
             // rdComum
             // 
