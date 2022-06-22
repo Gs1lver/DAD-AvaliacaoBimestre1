@@ -13,7 +13,7 @@ namespace AvaliacaoBimestre1
     public partial class frmMovimento : Form
     {
         static List<contaBancaria> lstConta = new List<contaBancaria>();
-        private contaBancaria _contaAtual = null;
+        private contaBancaria contaAtual = null;
         private int operacao = 0; //1 para Depositar e 2 para Sacar
 
 
@@ -69,36 +69,126 @@ namespace AvaliacaoBimestre1
 
         private void txtValor_Leave(object sender, EventArgs e)
         {
-            if (Convert.ToDouble(txtValor.Text) < 0)
+            if (Convert.ToDouble(txtValor.Text) <= 0)
             {
-                MessageBox.Show("Não é possível lançar valores negativos!", "Valor Inválido!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Não é possível lançar valores negativos, nem nulos!", "Valor Inválido!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtValor.Focus();
             }
         }
 
         private void btnLancar_Click(object sender, EventArgs e)
         {
+
             if (operacao == 1)
             {
                 double Saldo = Convert.ToDouble(txtSaldo.Text);
                 Saldo += Convert.ToDouble(txtValor.Text);
                 txtSaldo.Text = Convert.ToString(Saldo);
+                contaAtual.Saldo = Saldo;
+
+
+                    grpSuperior.Enabled = true;
+                    grpMovimento.Enabled = false;
+                    this.Size = new Size(685, 255);
+                    txtConta.Enabled = true;
+                    btnDepositar.Enabled = true;
+                    btnSacar.Enabled = true;
+                    btnSair.Enabled = true;
+                    txtValor.Text = "";
             }
             else if (operacao == 2)
             {
-                double Saldo = Convert.ToDouble(txtSaldo.Text);
-                Saldo -= Convert.ToDouble(txtValor.Text);
-                txtSaldo.Text = Convert.ToString(Saldo);
+                double valorTotal = 0;
+                valorTotal += Convert.ToDouble(txtSaldo.Text);
+                if (rdEspecial.Checked)
+                {
+                    valorTotal += Convert.ToDouble(txtLimite.Text);
+                }
+
+                double lancamento = 0;
+                lancamento = Convert.ToDouble(txtValor.Text);
+
+                if(lancamento > valorTotal)
+                {
+                    MessageBox.Show("Insira um valor inferior ao saldo total!!", "Lançamento superior ao saldo total!!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtValor.Focus();
+                }else
+                {
+                    if (lancamento > Convert.ToDouble(txtSaldo.Text))
+                    {
+                        lancamento -= Convert.ToDouble(txtSaldo.Text);
+                        txtSaldo.Text = "0";
+                        double limite = Convert.ToDouble(txtLimite.Text);
+                        limite -= lancamento;
+                        txtLimite.Text = Convert.ToString(limite);
+                   }
+                    else
+                    {
+                        double Saldo = Convert.ToDouble(txtSaldo.Text);
+                        Saldo -= Convert.ToDouble(txtValor.Text);
+                        txtSaldo.Text = Convert.ToString(Saldo);
+                        contaAtual.Saldo = Saldo;
+                    }
+                    
+
+
+                    grpSuperior.Enabled = true;
+                    grpMovimento.Enabled = false;
+                    this.Size = new Size(685, 255);
+                    txtConta.Enabled = true;
+                    btnDepositar.Enabled = true;
+                    btnSacar.Enabled = true;
+                    btnSair.Enabled = true;
+                    txtValor.Text = "";
+                    
+                }
             }
-            else
-            {
-                MessageBox.Show("PQP DEU MUITO ERRO");
-            }
+
+
 
         }
         private void btnSair_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void txtConta_Leave(object sender, EventArgs e)
+        {
+            foreach(contaBancaria conta in lstConta)
+            {
+                if (conta.CodigoConta.Equals(txtConta.Text.Trim()))
+                {
+                    if (conta.Tipo == 0)
+                    {
+                        rdComum.Checked = true;
+                    }
+                    else
+                    {
+                        rdEspecial.Checked = true;
+                    }
+                    txtLimite.Text = conta.Limite.ToString();
+                    txtSaldo.Text = conta.Saldo.ToString();
+                    contaAtual = conta;
+                }
+            }
+            if (txtSaldo.Text.Equals(""))
+            {
+                MessageBox.Show("Número da conta inválido.","Alerta de Sistema!",MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtConta.Focus();
+            }
+
+        }
+
+        private void txtConta_TextChanged(object sender, EventArgs e)
+        {
+            rdComum.Enabled = false;
+            rdComum.Checked = false;
+            rdEspecial.Enabled = false;
+            rdEspecial.Checked = false;
+            txtLimite.Enabled = false;
+            txtLimite.Text = "";
+            txtSaldo.Enabled = false;
+            txtSaldo.Text = "";
         }
     }
 }

@@ -57,6 +57,8 @@ namespace AvaliacaoBimestre1
             this.txtConta.Name = "txtConta";
             this.txtConta.Size = new System.Drawing.Size(100, 20);
             this.txtConta.TabIndex = 0;
+            this.txtConta.TextChanged += new System.EventHandler(this.txtConta_TextChanged);
+            this.txtConta.Leave += new System.EventHandler(this.txtConta_Leave);
             // 
             // txtLimite
             // 
@@ -74,6 +76,7 @@ namespace AvaliacaoBimestre1
             // 
             // txtValor
             // 
+            this.txtValor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtValor.Location = new System.Drawing.Point(236, 49);
             this.txtValor.Name = "txtValor";
             this.txtValor.Size = new System.Drawing.Size(100, 22);
@@ -82,10 +85,10 @@ namespace AvaliacaoBimestre1
             // 
             // btnLancar
             // 
-            this.btnLancar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLancar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLancar.Location = new System.Drawing.Point(469, 28);
             this.btnLancar.Name = "btnLancar";
-            this.btnLancar.Size = new System.Drawing.Size(81, 39);
+            this.btnLancar.Size = new System.Drawing.Size(100, 43);
             this.btnLancar.TabIndex = 10;
             this.btnLancar.Text = "Lançar";
             this.btnLancar.UseVisualStyleBackColor = true;
@@ -101,6 +104,7 @@ namespace AvaliacaoBimestre1
             this.btnSacar.TabIndex = 6;
             this.btnSacar.Text = "SACAR";
             this.btnSacar.UseVisualStyleBackColor = false;
+            this.btnSacar.Click += new System.EventHandler(this.btnSacar_Click);
             // 
             // btnDepositar
             // 
@@ -116,13 +120,14 @@ namespace AvaliacaoBimestre1
             // 
             // btnSair
             // 
+            this.btnSair.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSair.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSair.Location = new System.Drawing.Point(510, 130);
             this.btnSair.Name = "btnSair";
             this.btnSair.Size = new System.Drawing.Size(122, 64);
             this.btnSair.TabIndex = 7;
             this.btnSair.Text = "S A I R";
-            this.btnSair.UseVisualStyleBackColor = true;
+            this.btnSair.UseVisualStyleBackColor = false;
             this.btnSair.Click += new System.EventHandler(this.btnSair_Click);
             // 
             // dtMovimento
@@ -159,6 +164,7 @@ namespace AvaliacaoBimestre1
             // 
             // grpSuperior
             // 
+            this.grpSuperior.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.grpSuperior.Controls.Add(this.lblSaldo);
             this.grpSuperior.Controls.Add(this.lblLimite);
             this.grpSuperior.Controls.Add(this.lblConta);
@@ -206,6 +212,7 @@ namespace AvaliacaoBimestre1
             // 
             // grpMovimento
             // 
+            this.grpMovimento.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.grpMovimento.Controls.Add(this.dtMovimento);
             this.grpMovimento.Controls.Add(this.btnLancar);
             this.grpMovimento.Controls.Add(this.lblValor);
@@ -243,7 +250,7 @@ namespace AvaliacaoBimestre1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(669, 326);
             this.Controls.Add(this.grpMovimento);
             this.Controls.Add(this.grpSuperior);
